@@ -30,13 +30,13 @@
           </ol>
           <div class="carousel-inner" role="listbox">
             <div class="carousel-item active">
-              <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="First slide">
+              <img class="d-block img-fluid" src="http://lorempixel.com/900/350/sports/" alt="First slide">
             </div>
             <div class="carousel-item">
-              <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Second slide">
+              <img class="d-block img-fluid" src="http://lorempixel.com/900/350/sports/" alt="Second slide">
             </div>
             <div class="carousel-item">
-              <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Third slide">
+              <img class="d-block img-fluid" src="http://lorempixel.com/900/350/sports/" alt="Third slide">
             </div>
           </div>
           <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -56,23 +56,31 @@
             <form class="form-horizontal" method="post" action="{{route('productos.store')}}" enctype="application/x-www-form-urlencoded">
               <div class="form-group">
                   <label>Nombre</label>
-                  <input type="text" class="form-control" name="nombre" placeholder="Escribe el nombre del producto">
+              <input type="text" class="form-control  {!! $errors->first('nombre','has-danger')!!}" name="nombre" value="{{old('nombre')}}" placeholder="Escribe el nombre del producto">
+                  <span class="form-control-feedback"></span>
+                  <small style="color:red">{!!$errors->first('nombre')!!}</small>
               </div>
               <div class="form-group">
                 <label>Descripción</label>
-                <textarea name="descripcion" class="form-control" placeholder="Escribe la descripción del producto"></textarea>
+                <textarea name="descripcion" class="form-control {!! $errors->first('descripcion','has-danger')!!}" placeholder="Escribe la descripción del producto"></textarea>
+                <span class="form-control-feedback"></span>
+                  <small style="color:red">{!!$errors->first('descripcion')!!}</small>
               </div>
               <div class="form-group">
                 <label>Precio</label>
-                <input type="number" class="form-control" name="precio">
+                <input type="text" class="form-control {!! $errors->first('precio','has-danger')!!}" name="precio">
+                <span class="form-control-feedback"></span>
+                  <small style="color:red">{!!$errors->first('precio')!!}</small>
               </div>
               <div class="form-group">
-                <select class="form-control" name="categorias_id">
+                <select class="form-control {!! $errors->first('categorias_id','has-danger')!!}" name="categorias_id">
                   <option value="0">Selecciona a que categoría pertenece</option>
                   @foreach ($categorias as $categoria)
                 <option value="{{$categoria->id}}">{{$categoria->nombre}}</option>   
                   @endforeach
                 </select>
+                <span class="form-control-feedback"></span>
+                  <small style="color:red">{!!$errors->first('categorias_id')!!}</small>
               </div>
               <div class="form-group">
                   <button type="submit" class="btn btn-primary btn-block">Guardar Producto</button>

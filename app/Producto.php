@@ -18,5 +18,17 @@ class Producto extends Model
 
     public function categoria(){
         return $this->belongsTo('App\Categoria','categorias_id');
+        // return $this->belongsTo(Categoria::class,'categorias_id');
     }
+    /*public function categorias(){
+        return $this->belongsTo(Categoria::class);
+    }
+    public function categoria2(){
+        return $this->belongsTo(Categoria::class,'categorias_id');
+    }
+
+    public function categorias3(){
+        return $this->belongsToMany(Categoria::class,'productos_categorias','categorias_id','productos_id')
+        ->withPivot('descripcion');
+    }*/
 }

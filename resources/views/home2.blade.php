@@ -4,6 +4,9 @@
     
 
 <!-- Page Content -->
+@guest
+
+@else
 <div class="container pt-5">
 
     <div class="row">
@@ -21,7 +24,7 @@
       <!-- /.col-lg-3 -->
 
       <div class="col-lg-9">
-        <!-- div -->
+
         <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
           <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -48,43 +51,28 @@
             <span class="sr-only">Next</span>
           </a>
         </div>
-        <!-- div form -->
-        <div class="container border">
-          <div class="left p-4">
-          <h2>Editando producto {{$producto->nombre}}</h2>
-          </div>
-            <form class="form-horizontal" method="post" action="{{route('productos.update',$producto->id)}}" enctype="application/x-www-form-urlencoded">
-                {{method_field('PUT')}}
-                <div class="form-group">
-                  <label>Nombre</label>
-                  <input value="{{$producto->id}}" type="text" class="form-control" name="nombre" placeholder="Escribe el nombre del producto">
+
+        <div class="row">
+          @foreach($productos as $producto)
+            <div class="col-lg-4 col-md-6 mb-4">
+              <div class="card h-100">
+                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                <div class="card-body">
+                  <h4 class="card-title">
+                    <a href="#">{{$producto->nombre}}</a>
+                  </h4>
+                <h5>{{$producto->precio}}</h5>
+                  <p class="card-text">{{$producto->descripcion}}</p>
+                </div>
+                <div class="card-footer">
+                  <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                </div>
               </div>
-              <div class="form-group">
-                <label>Descripción</label>
-              <textarea  name="descripcion" class="form-control" placeholder="Escribe la descripción del producto">{{$producto->nombre}}</textarea>
-              </div>
-              <div class="form-group">
-                <label>Precio</label>
-              <input value="{{$producto->precio}}" type="number" class="form-control" name="precio">
-              </div>
-              <div class="form-group">
-                <select class="form-control" name="categorias_id">
-                  <option value="0">Selecciona a que categoría pertenece</option>
-                  @foreach ($categorias as $categoria)
-                    @if($categoria->id == $producto->categorias_id)
-                        <option value="{{$categoria->id}}" selected>{{$categoria->nombre}}</option>   
-                    @else
-                        <option value="{{$categoria->id}}">{{$categoria->nombre}}</option>   
-                    @endif
-                  @endforeach
-                </select>
-              </div>
-              <div class="form-group">
-                  <button type="submit" class="btn btn-primary btn-block">Guardar Producto</button>
-               </div>
-               {{ csrf_field() }}  
-            </form>
-          </div>
+            </div>
+          @endforeach
+        </div>
+        <!-- /.row -->
+
       </div>
       <!-- /.col-lg-9 -->
 
@@ -94,3 +82,9 @@
   </div>
   <!-- /.container -->
 @endsection
+<div class="container">
+  <div class= "center">
+    <h2> Por favor inicia Sesión </h2>
+  </div>
+</div>
+@endguest
