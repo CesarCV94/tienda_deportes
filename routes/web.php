@@ -37,7 +37,11 @@ Route::group(['middleware' => ['auth']],function(){
     // ruta para ejemplo de relaciones
     Route::get('relaciones','ProductosController@relaciones');
 
-}); 
+});
+
+// ruta para probar arichivo helpers.php
+
+Route::get('prueba-helper','HelpersController@pruebaHelper');
 
 Route::group(['middleware' => ['access-token']],function(){
     route::get('prueba-middleware',function(){

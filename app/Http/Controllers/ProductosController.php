@@ -11,6 +11,10 @@ use App\Http\Requests\ProductoRequest;
 // incluir DB
 //use Illuminate\Support\Facades\DB;
 use DB;
+// incluye la clase mail
+use Mail;
+//uso de email createProducto
+use App\Mail\CreateProducto;
 
 class ProductosController extends Controller
 {
@@ -57,8 +61,16 @@ class ProductosController extends Controller
      */
     public function store(ProductoRequest $request)
     {
-        Producto::create($request->all());
-        return redirect('productos')->with('alert', ' Producto agregado correctamente.');;
+        // crea un nuevo registro de producto
+        $producto = Producto::create($request->all());
+        //obtenemos el correo del usuario logeado
+        $email = getEmailUser();
+        //envio de correo de un nueevo producto registrado
+        Mail::to($email)->send(new CreateProducto($producto));
+
+        
+
+        return redirect('productos')->with('alert', ' Producto agregado correctamente.');
 
 
     }
