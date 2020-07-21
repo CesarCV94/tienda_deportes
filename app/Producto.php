@@ -16,6 +16,10 @@ class Producto extends Model
     ];
     public $timestamps = false;
 
+    public $primaryKey = 'id_producto';
+
+    public $increments = false;
+
     public function categoria(){
         return $this->belongsTo('App\Categoria','categorias_id');
         // return $this->belongsTo(Categoria::class,'categorias_id');

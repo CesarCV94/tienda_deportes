@@ -11,9 +11,12 @@
         "php": "^7.2.5",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^1.0",
-        "guzzlehttp/guzzle": "^6.3",
+        "guzzlehttp/guzzle": "^7.0",
         "laravel/framework": "^7.0",
-        "laravel/tinker": "^2.0"
+        "laravel/passport": "^9.3",
+        "laravel/tinker": "^2.0",
+        "realrashid/sweet-alert": "^3.1",
+        "symfony/psr-http-message-bridge": "^2.0"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
@@ -40,6 +43,9 @@
         "classmap": [
             "database/seeds",
             "database/factories"
+        ],
+        "files": [
+            "app/helpers.php"
         ]
     },
     "autoload-dev": {

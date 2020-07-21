@@ -4,7 +4,6 @@
     
 
 <!-- Page Content -->
-
 <div class="container pt-5">
 
     <div class="row">
@@ -22,7 +21,7 @@
       <!-- /.col-lg-3 -->
 
       <div class="col-lg-9">
-
+        <!-- div -->
         <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
           <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -49,28 +48,23 @@
             <span class="sr-only">Next</span>
           </a>
         </div>
-
-        <div class="row">
-          @foreach($productos as $producto)
-            <div class="col-lg-4 col-md-6 mb-4">
-              <div class="card h-100">
-                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                <div class="card-body">
-                  <h4 class="card-title">
-                    <a href="#">{{$producto->nombre}}</a>
-                  </h4>
-                <h5>{{$producto->precio}}</h5>
-                  <p class="card-text">{{$producto->descripcion}}</p>
+        <!-- div form -->
+        <div class="container border">
+          <div class="left p-4">
+          <h2>Editando producto {{$categoria->nombre}}</h2>
+          </div>
+            <form class="form-horizontal" action="{{route('categorias.update',$cate->id)}}" method="POST" enctype="application/x-www-form-urlencoded">
+                {{method_field('PUT')}}
+                <div class="form-group">
+                    <label>Nombre</label>
+                    <input class="form-control" name="nombre" value="{{$cate->nombre}}">
                 </div>
-                <div class="card-footer">
-                  <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block">Actualizar Categoría</button>
                 </div>
-              </div>
-            </div>
-          @endforeach
-        </div>
-        <!-- /.row -->
-
+                {{ csrf_field() }}
+            </form>
+          </div>
       </div>
       <!-- /.col-lg-9 -->
 
@@ -79,4 +73,4 @@
 
   </div>
   <!-- /.container -->
-  @endsection
+@endsection

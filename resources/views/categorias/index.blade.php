@@ -1,10 +1,9 @@
 @extends('layout.main')
 @section('title','Home')
 @section('content')
-    
+@include('sweetalert::alert')    
 
 <!-- Page Content -->
-
 <div class="container pt-5">
 
     <div class="row">
@@ -49,28 +48,48 @@
             <span class="sr-only">Next</span>
           </a>
         </div>
-
-        <div class="row">
-          @foreach($productos as $producto)
-            <div class="col-lg-4 col-md-6 mb-4">
-              <div class="card h-100">
-                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                <div class="card-body">
-                  <h4 class="card-title">
-                    <a href="#">{{$producto->nombre}}</a>
-                  </h4>
-                <h5>{{$producto->precio}}</h5>
-                  <p class="card-text">{{$producto->descripcion}}</p>
-                </div>
-                <div class="card-footer">
-                  <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                </div>
-              </div>
-            </div>
-          @endforeach
-        </div>
         <!-- /.row -->
-
+        <!-- div -->
+        <div class="container pb-5">
+          <!-- table -->
+            @if(count($categorias) > 0)
+            <table class="table">
+              <thead>
+                  <th>ID</th>
+                  <th>Nombre</th>
+                  <th>EDITAR</th>
+                  <th>ELIMINAR</th>
+              </thead>
+              <tbody>
+                 @foreach ($categorias as $categoria)
+                     <tr>
+                         <td width="20%">{{$categoria->id}}</td>
+                         <td width="50%">{{$categoria->nombre}}</td>
+                         <td width="15%">
+                            <a href="{{route('categorias.edit',$categoria->id)}}">
+                                <button type="button" rel="tooltip" class="btn btn-success btn-fab btn-round">Editar</button>
+                            </a>
+                         </td>
+                         <td width="15%">
+                            <form action="{{route('categorias.destroy',$categoria->id)}}" method="POST" onsubmit=" return confirm('Esta seguro de eliminar la categoria {{$categoria->nombre}}');">
+                                <input name="_method" type="hidden" value="DELETE">
+                                 {{ csrf_field() }}
+                                 <button type="submit" class="btn btn-danger btn-fab btn-round">Eliminar</button>
+                            </form>
+                         </td>
+                     </tr>
+                 @endforeach
+              </tbody>
+            </table>
+            @else
+            <div class="container" style="height:150px">
+                <h2>No hay Categorías creadas</h2>
+            </div>
+            @endif
+            <div class="card-footer">
+                <a href="{{route('categorias.create')}}">Agregar Nueva Categoría</a>
+            </div>
+        </div> 
       </div>
       <!-- /.col-lg-9 -->
 
@@ -79,4 +98,4 @@
 
   </div>
   <!-- /.container -->
-  @endsection
+@endsection

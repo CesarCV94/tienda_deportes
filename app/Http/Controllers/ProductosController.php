@@ -96,6 +96,7 @@ class ProductosController extends Controller
     {   
          //retorna las categorias
          $categorias = Categoria::all();
+         $producto = Producto::where('id_producto',$id)->first();
         $producto = Producto::findOrFail($id);
         return view('productos.edit',compact('producto','categorias'));
     }

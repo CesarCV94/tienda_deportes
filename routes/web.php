@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('home');
 });
 
 //rutas protegidas por el middleware auth
@@ -24,6 +24,9 @@ Route::group(['middleware' => ['auth']],function(){
 
     //ruta de productos
     Route::resource('productos','ProductosController');
+
+    //ruta para categorías
+    Route::resource('categorias','CategoriasController');
 
     // rutas para filtrar productos por categoria
     Route::get('productos-categorias/{id_categoria}','Home2Controller@getProductosPorCategoria')->name('productos.categoria');
